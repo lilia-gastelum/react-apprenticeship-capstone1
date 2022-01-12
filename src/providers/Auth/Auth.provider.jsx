@@ -16,6 +16,7 @@ function useAuth() {
 // eslint-disable-next-line react/prop-types
 function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const lastAuthState = storage.get(AUTH_STORAGE_KEY);
@@ -26,16 +27,18 @@ function AuthProvider({ children }) {
 
   const login = useCallback(() => {
     setAuthenticated(true);
+    setUser({username: 'wizeline', password: 'Rocks!'})
     storage.set(AUTH_STORAGE_KEY, true);
   }, []);
 
   const logout = useCallback(() => {
     setAuthenticated(false);
+    setUser(null);
     storage.set(AUTH_STORAGE_KEY, false);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ login, logout, authenticated }}>
+    <AuthContext.Provider value={{ login, logout, authenticated, user }}>
       {children}
     </AuthContext.Provider>
   );

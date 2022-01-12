@@ -1,8 +1,8 @@
-.homepage {
-  text-align: center;
-}
-
-.homepage h1 {
-  font-size: 3rem;
-  letter-spacing: -2px;
+.ui.fluid.vertical.tabular.menu>.active > i {
+  background: -webkit-linear-gradient(120deg,
+  #833ab4 0,
+  #fd1d1d 20%,
+  #e36414 80%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
