@@ -27,7 +27,7 @@ function AuthProvider({ children }) {
 
   const login = useCallback(() => {
     setAuthenticated(true);
-    setUser({username: 'wizeline', password: 'Rocks!'})
+    setUser({ username: 'wizeline', password: 'Rocks!' });
     storage.set(AUTH_STORAGE_KEY, true);
   }, []);
 

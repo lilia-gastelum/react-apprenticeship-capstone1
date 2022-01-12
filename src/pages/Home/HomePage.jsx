@@ -10,26 +10,26 @@ import VideoItem from './VideoItem';
 import styled from 'styled-components';
 
 const Scroll = styled.div`
-height: 700px;
-overflow-x: hidden; 
-overflow-y: auto;
-margin-bottom: 5px;
+  height: 700px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-bottom: 5px;
 `;
 
 const Home = styled.section`
-text-align: center;
-padding-top: 2%;
-background-color: #fdfdfd; 
+  text-align: center;
+  padding-top: 2%;
+  background-color: #fdfdfd;
 `;
 
 const Heading = styled.h1`
-font-size: 3rem;
-letter-spacing: -2px;
-text-align: left !important
+  font-size: 3rem;
+  letter-spacing: -2px;
+  text-align: left !important;
 `;
 
 const SmallMessage = styled.h5`
-text-align: left !important
+  text-align: left !important;
 `;
 
 function HomePage() {
@@ -39,22 +39,24 @@ function HomePage() {
   const [listVideos, setListVideos] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
 
-
-
   useEffect(() => {
-    const fetchData = () => fetch('https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json')
-      .then((response) => response.json())
-      .then(resJson => {
-        setListVideos([...resJson.items.filter(f => f.id.kind === 'youtube#video')]);
-        setTotalItems(resJson.pageInfo.totalResults);
-      })
-      .catch((error) => {
-        console.error('error', error);
-      })
+    const fetchData = () =>
+      fetch(
+        'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
+      )
+        .then((response) => response.json())
+        .then((resJson) => {
+          setListVideos([
+            ...resJson.items.filter((f) => f.id.kind === 'youtube#video'),
+          ]);
+          setTotalItems(resJson.pageInfo.totalResults);
+        })
+        .catch((error) => {
+          console.error('error', error);
+        });
 
     fetchData();
   }, []);
-
 
   function deAuthenticate(event) {
     event.preventDefault();
@@ -68,18 +70,16 @@ function HomePage() {
       <Grid>
         {authenticated && (
           <Grid.Column width={3}>
-          <SideBar logout={deAuthenticate}/>
-        </Grid.Column>
+            <SideBar logout={deAuthenticate} />
+          </Grid.Column>
         )}
         <Grid.Column width={authenticated ? 13 : 16}>
           <Heading>Hi, there!</Heading>
           <SmallMessage>Showing you {totalItems} results...</SmallMessage>
           <Scroll>
-            <Grid container doubling columns='4'>
-              {listVideos.map(video => {
-                return (
-                  <VideoItem key={video.etag} video={video} />
-                )
+            <Grid container doubling columns="4">
+              {listVideos.map((video) => {
+                return <VideoItem key={video.etag} video={video} />;
               })}
             </Grid>
           </Scroll>
