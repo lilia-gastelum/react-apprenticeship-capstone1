@@ -6,6 +6,7 @@ import { useAuth } from '../../providers/Auth';
 import Header from '../Header';
 import SideBar from '../SideBar';
 import './Home.styles.css';
+import gapi from './api';
 import VideoItem from './VideoItem';
 import styled from 'styled-components';
 
@@ -38,8 +39,7 @@ function HomePage() {
   const { authenticated, logout } = useAuth();
   const [listVideos, setListVideos] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
-
-
+  const [term, setTerm] = useState('wizeline');
 
   useEffect(() => {
     const fetchData = () => fetch('https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json')
@@ -53,6 +53,15 @@ function HomePage() {
       })
 
     fetchData();
+    // debugger;
+    // console.log(process.env.REACT_APP_YOUTUBE_API_KEY)
+    // gapi.get('/search', {
+    //   params: {
+    //     q: term
+    //   }
+    // }).then((response) =>{
+    //   console.log(response);
+    // })
   }, []);
 
 
