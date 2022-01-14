@@ -1,8 +1,11 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+
 const SideMenu = styled(Menu)({
   height: '100%',
+  marginTop: '12% !important'
 });
 
 const Item = styled(Menu.Item)((props) => ({
@@ -18,8 +21,14 @@ const Item = styled(Menu.Item)((props) => ({
 }));
 
 function SideBar(props) {
+  const history = useHistory();
   const { logout } = props;
   const [optionMenu, setOptionMenu] = React.useState('home');
+
+  const changeMenu = (option) => {
+    history.push(`/${option}`);
+    setOptionMenu(option)
+  };
 
   return (
     <SideMenu fluid vertical tabular>
@@ -27,19 +36,19 @@ function SideBar(props) {
         icon="home"
         name="home"
         active={optionMenu === 'home'}
-        onClick={() => setOptionMenu('home')}
+        onClick={() => changeMenu('home')}
       />
       <Item
         icon="heart outline"
         name="favorites"
         active={optionMenu === 'favorites'}
-        onClick={() => setOptionMenu('favorites')}
+        onClick={() => changeMenu('favorites')}
       />
       <Item
         icon="clock outline"
         name="watchLater"
         active={optionMenu === 'watchLater'}
-        onClick={() => setOptionMenu('watchLater')}
+        onClick={() => changeMenu('watchLater')}
       />
       <Menu.Item name="logOut" icon="log out" onClick={() => logout()} />
     </SideMenu>

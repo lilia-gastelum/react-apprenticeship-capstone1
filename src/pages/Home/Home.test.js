@@ -1,8 +1,28 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import AuthProvider from '../../providers/Auth';
 import HomePage from './HomePage';
 import VideoItem from './VideoItem';
+import axios from 'axios';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+
+jest.mock('axios');
+
+export const fetchVideos = async () => {
+  try {
+    return await axios.get(
+      '/search', {
+            params: {
+              maxResults: 25,
+              q: 'wizeline',
+            type: "video" 
+            }
+          }
+    );
+  } catch (e) {
+    return [];
+  }
+};
 
 const model = {
   etag: '',
@@ -51,17 +71,6 @@ const model = {
     },
   ],
 };
-// const mockLogOut = jest.fn();
-
-// jest.mock('../../providers/Auth', () => ({
-//     __esModule: true,
-//     useAuth: () => {
-//       return {
-//           authenticated: true,
-//           logout: mockLogOut
-//       };
-//     },
-//   }));
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -73,13 +82,11 @@ describe('renders total items message', () => {
   it('must display message', async () => {
     await waitFor(() => {
       render(
-        <AuthProvider>
-          <HomePage />
-        </AuthProvider>
+        <HomePage />
       );
     });
 
-    const message = screen.getByText(/showing/i);
+    const message = screen.getByText(/Hi, there!/i);
     expect(message).toBeInTheDocument();
   });
 
@@ -87,13 +94,11 @@ describe('renders total items message', () => {
     global.fetch.mockReturnValueOnce(Promise.reject());
     await waitFor(() => {
       render(
-        <AuthProvider>
-          <HomePage />
-        </AuthProvider>
+        <HomePage />
       );
     });
 
-    const message = screen.getByText(/showing/i);
+    const message = screen.getByText(/Hi, there!/i);
     expect(message).toBeInTheDocument();
   });
 
@@ -102,28 +107,57 @@ describe('renders total items message', () => {
 
     await waitFor(() => {
       render(
-        <AuthProvider>
-          <HomePage />
-        </AuthProvider>
+        <HomePage />
       );
     });
 
-    // console.log('después del render');
-    const message = screen.getByText(/showing/i);
-    // const logOutButton = screen.getByTitle('Log Out');
-    // await waitFor(() => {
-    //     fireEvent.click(logOutButton);
-    // });
-    // expect(mockLogOut).toHaveBeenCalled();
+    const message = screen.getByText(/Hi, there!/i);
     expect(message).toBeInTheDocument();
   });
 });
 
 describe('renders video item', () => {
-  it('must display message', async () => {
+  it('must display thumbnail', () => {
     render(<VideoItem />);
 
     const message = screen.getByAltText(/thumbnail/i);
     expect(message).toBeInTheDocument();
+  });
+
+  test('redirects to video player', () => {
+    const history = createMemoryHistory();
+  
+    render(
+      <Router history={history}>
+        <VideoItem />
+      </Router>
+    );
+  
+    const button = screen.getByAltText(/thumbnail/i);
+    expect(button).toBeInTheDocument();
+  
+    fireEvent.click(button);
+    expect(history.length).toBe(2);
+    expect(history.location.pathname).toBe('/video');
+  });
+});
+
+
+describe("fetchData", () => {
+  describe("when API call is successful", () => {
+    it("should return video list", async () => {
+      axios.get.mockResolvedValueOnce(model);
+      const result = await fetchVideos();
+      expect(axios.get).toHaveBeenCalledWith(
+        '/search', {
+              params: {
+                maxResults: 25,
+                q: 'wizeline',
+              type: "video" 
+              }
+            }
+      );
+      expect(result).toEqual(model);
+    });
   });
 });

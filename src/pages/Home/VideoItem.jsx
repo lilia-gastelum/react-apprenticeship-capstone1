@@ -1,11 +1,14 @@
 import React from 'react';
 import { Card, Grid, Image } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 
 function VideoItem(props) {
     const {video} = props;
+    const history = useHistory();
+
     return (
         <Grid.Column>
-            <Card href='#' className="selectable">
+            <Card className="selectable" onClick={() => {history.push('/video', {video: video})}}>
                 <Image alt={'thumbnail'} src={video?.snippet?.thumbnails?.high?.url} />
                 <Card.Content>
                     <Card.Header>{video?.snippet?.title}</Card.Header>

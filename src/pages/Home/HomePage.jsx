@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Grid, Pagination } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
-import { useAuth } from '../../providers/Auth';
-import Header from '../Header';
-import SideBar from '../SideBar';
 import './Home.styles.css';
 import gapi from './api';
 import VideoItem from './VideoItem';
@@ -19,7 +15,7 @@ const Scroll = styled.div`
 
 const Home = styled.section`
   text-align: center;
-  padding-top: 2%;
+  padding-top: 4.3%;
   background-color: #fdfdfd;
 `;
 
@@ -29,20 +25,29 @@ const Heading = styled.h1`
   text-align: left !important;
 `;
 
-const SmallMessage = styled.h5`
-  text-align: left !important;
-`;
+// const SmallMessage = styled.h5`
+//   text-align: left !important;
+// `;
 
-function HomePage() {
-  const history = useHistory();
+function HomePage({term}) {
   const sectionRef = useRef(null);
-  const { authenticated, logout } = useAuth();
   const [listVideos, setListVideos] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
-<<<<<<< HEAD
-  const [term, setTerm] = useState('wizeline');
-=======
->>>>>>> capstone1
+
+  // useEffect(() => {
+  //   gapi.get('/search', {
+  //     params: {
+  //       maxResults: 25,
+  //       q: term === '' ? 'wizeline' : term,
+  //     type: "video" 
+  //     }
+  //   }).then((response) =>{
+  //     setListVideos([
+  //       ...response.data.items
+  //     ]);
+  //     setTotalItems(response.data.pageInfo.totalResults);
+  //   })
+  // }, [term]);
 
   useEffect(() => {
     const fetchData = () =>
@@ -61,35 +66,16 @@ function HomePage() {
         });
 
     fetchData();
-    // debugger;
-    // console.log(process.env.REACT_APP_YOUTUBE_API_KEY)
-    // gapi.get('/search', {
-    //   params: {
-    //     q: term
-    //   }
-    // }).then((response) =>{
-    //   console.log(response);
-    // })
   }, []);
 
-  function deAuthenticate(event) {
-    event.preventDefault();
-    logout();
-    history.push('/');
-  }
+  
 
   return (
     <Home className="homepage" ref={sectionRef}>
-      <Header />
       <Grid>
-        {authenticated && (
-          <Grid.Column width={3}>
-            <SideBar logout={deAuthenticate} />
-          </Grid.Column>
-        )}
-        <Grid.Column width={authenticated ? 13 : 16}>
+        <Grid.Column width={16}>
           <Heading>Hi, there!</Heading>
-          <SmallMessage>Showing you {totalItems} results...</SmallMessage>
+          {/* <SmallMessage>Showing you {totalItems} results...</SmallMessage> */}
           <Scroll>
             <Grid container doubling columns="4">
               {listVideos.map((video) => {
@@ -97,24 +83,9 @@ function HomePage() {
               })}
             </Grid>
           </Scroll>
-          <Pagination defaultActivePage={1} totalPages={10} />
+          {/* <Pagination defaultActivePage={1} totalPages={10} /> */}
         </Grid.Column>
       </Grid>
-
-      {/* {authenticated ? (
-        <>
-          <h2>Good to have you back</h2>
-          <span>
-            <Link to="/" onClick={deAuthenticate}>
-              ← logout
-            </Link>
-            <span className="separator" />
-            <Link to="/secret">show me something cool →</Link>
-          </span>
-        </>
-      ) : (
-        <Link to="/login">let me in →</Link>
-      )} */}
     </Home>
   );
 }

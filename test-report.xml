@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/utils/hooks/useFortune.test.tsx">
-    <testCase name="should get value" duration="51"/>
+    <testCase name="should get value" duration="62"/>
   </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/utils/utils.test.js">
-    <testCase name="should get value" duration="31"/>
-  </file>
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/components/Layout/Layout.test.js">
-    <testCase name="renders layout must display form" duration="29"/>
+    <testCase name="should get value" duration="49"/>
   </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Login/Login.test.js">
-    <testCase name="renders login must display form" duration="47"/>
+    <testCase name="renders login must display form" duration="60"/>
+    <testCase name="renders login logs in" duration="45"/>
   </file>
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Header/Header.test.js">
-    <testCase name="renders header must display menu" duration="56"/>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/components/Layout/Layout.test.js">
+    <testCase name="renders layout must display form" duration="76"/>
   </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/SideBar/SideBar.test.tsx">
-    <testCase name="renders side bar must display message" duration="46"/>
-    <testCase name="renders side bar change option home" duration="15"/>
-    <testCase name="renders side bar change option favorite" duration="7"/>
-    <testCase name="renders side bar change option watchLater" duration="6"/>
-  </file>
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Home/Home.test.js">
-    <testCase name="renders total items message must display message" duration="102"/>
-    <testCase name="renders total items message fetch catches error" duration="49"/>
-    <testCase name="renders total items message log out button" duration="40"/>
-    <testCase name="renders video item must display message" duration="6"/>
+    <testCase name="renders side bar must display message" duration="48"/>
+    <testCase name="renders side bar change option home" duration="21"/>
+    <testCase name="renders side bar change option favorites" duration="16"/>
+    <testCase name="renders side bar change option watch later" duration="16"/>
   </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/components/App/App.test.js">
-    <testCase name="renders app must display app" duration="95"/>
+    <testCase name="renders app must display app" duration="65"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Header/Header.test.js">
+    <testCase name="renders header must display menu" duration="85"/>
+    <testCase name="renders header it goes to home on click" duration="46"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/VideoPlayer/VideoPlayer.test.js">
+    <testCase name="testing video player renders embed" duration="82"/>
+    <testCase name="fetchRelatedData if API call is successful should return related videos list" duration="4"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Home/Home.test.js">
+    <testCase name="renders total items message must display message" duration="37"/>
+    <testCase name="renders total items message fetch catches error" duration="9"/>
+    <testCase name="renders total items message log out button" duration="5"/>
+    <testCase name="renders video item must display thumbnail" duration="6"/>
+    <testCase name="renders video item redirects to video player" duration="10"/>
+    <testCase name="fetchData when API call is successful should return video list" duration="1"/>
   </file>
 </testExecutions>

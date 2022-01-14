@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Checkbox, Dropdown, Icon, Input, Menu } from 'semantic-ui-react';
 import { useAuth } from '../../providers/Auth';
@@ -28,18 +29,25 @@ const SearchInput = styled(Input)({
   width: '100% !important',
 });
 
-function Header() {
+function Header({ setTerm }) {
   const { authenticated, user, logout } = useAuth();
   const history = useHistory();
 
+  const onKeyPress = (event) => {
+    if (event.key === 'Enter' && event.target.value !== '') {
+      setTerm(event.target.value);
+    }
+  };
+
   return (
     <TopMenu fixed="top">
-      <Item header>Wizeline</Item>
+      <Item header onClick={() => history.push('/home')}><h3>Wizeline</h3></Item>
       <Search>
         <SearchInput
           className="icon search"
           icon="search"
           placeholder="Buscar..."
+          onKeyPress={(e) => onKeyPress(e)}
         />
       </Search>
       <Menu.Menu position="right">
@@ -74,5 +82,10 @@ function Header() {
     </TopMenu>
   );
 }
+
+Header.propTypes = {
+  setTerm: PropTypes.func
+};
+
 
 export default Header;

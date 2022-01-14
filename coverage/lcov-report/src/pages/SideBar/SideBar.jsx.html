@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">92.86% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>13/14</span>
             </div>
         
             
@@ -36,16 +36,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.89% </span>
+                <span class="strong">92.31% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
@@ -107,14 +107,24 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,10 +135,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -147,12 +165,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -161,49 +175,56 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import styled from 'styled-components';
-const SideMenu = styled(Menu)({
-  height: '100%'
-})
+import { useHistory } from 'react-router-dom';
 &nbsp;
-const Item = styled(Menu.Item)(props =&gt; ({
-  background: props.active ? `-webkit-linear-gradient(120deg,
+const SideMenu = styled(Menu)({
+  height: '100%',
+  marginTop: '12% !important'
+});
+&nbsp;
+const Item = styled(Menu.Item)((props) =&gt; ({
+  background: props.active
+    ? `-webkit-linear-gradient(120deg,
   #833ab4 0,
   #fd1d1d 20%,
   #e36414 80%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important
-  ` : 'transparent'
-}))
+  `
+    : 'transparent',
+}));
 &nbsp;
 function SideBar(props) {
+  const history = useHistory();
   const { logout } = props;
   const [optionMenu, setOptionMenu] = React.useState('home');
+&nbsp;
+  const changeMenu = (option) =&gt; {
+    history.push(`/${option}`);
+    setOptionMenu(option)
+  };
 &nbsp;
   return (
     &lt;SideMenu fluid vertical tabular&gt;
       &lt;Item
-        icon='home'
-        name='home'
+        icon="home"
+        name="home"
         active={optionMenu === 'home'}
-        onClick={() =&gt; setOptionMenu('home')}
+        onClick={() =&gt; changeMenu('home')}
       /&gt;
       &lt;Item
-        icon='heart outline'
-        name='favorites'
+        icon="heart outline"
+        name="favorites"
         active={optionMenu === 'favorites'}
-        onClick={() =&gt; setOptionMenu('favorites')}
+        onClick={() =&gt; changeMenu('favorites')}
       /&gt;
       &lt;Item
-        icon='clock outline'
-        name='watchLater'
+        icon="clock outline"
+        name="watchLater"
         active={optionMenu === 'watchLater'}
-        onClick={() =&gt; setOptionMenu('watchLater')}
+        onClick={() =&gt; changeMenu('watchLater')}
       /&gt;
-      &lt;Menu.Item
-        name='logOut'
-        icon='log out'
-        onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >logout()}</span>
-      /&gt;
+      &lt;Menu.Item name="logOut" icon="log out" onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >logout()}</span> /&gt;
     &lt;/SideMenu&gt;
   );
 }
@@ -216,7 +237,7 @@ export default SideBar;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jan 11 2022 17:24:12 GMT-0700 (Mexican Pacific Standard Time)
+                at Fri Jan 14 2022 12:45:26 GMT-0700 (Mexican Pacific Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
