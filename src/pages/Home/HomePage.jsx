@@ -32,41 +32,40 @@ const Heading = styled.h1`
 function HomePage({term}) {
   const sectionRef = useRef(null);
   const [listVideos, setListVideos] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
-
-  // useEffect(() => {
-  //   gapi.get('/search', {
-  //     params: {
-  //       maxResults: 25,
-  //       q: term === '' ? 'wizeline' : term,
-  //     type: "video" 
-  //     }
-  //   }).then((response) =>{
-  //     setListVideos([
-  //       ...response.data.items
-  //     ]);
-  //     setTotalItems(response.data.pageInfo.totalResults);
-  //   })
-  // }, [term]);
+  // const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
-    const fetchData = () =>
-      fetch(
-        'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
-      )
-        .then((response) => response.json())
-        .then((resJson) => {
-          setListVideos([
-            ...resJson.items.filter((f) => f.id.kind === 'youtube#video'),
-          ]);
-          setTotalItems(resJson.pageInfo.totalResults);
-        })
-        .catch((error) => {
-          console.error('error', error);
-        });
+    gapi.get('/search', {
+      params: {
+        maxResults: 25,
+        q: term,
+      type: "video" 
+      }
+    }).then((response) =>{
+      setListVideos([
+        ...response.data.items
+      ]);
+    })
+  }, [term]);
 
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = () =>
+  //     fetch(
+  //       'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
+  //     )
+  //       .then((response) => response.json())
+  //       .then((resJson) => {
+  //         setListVideos([
+  //           ...resJson.items.filter((f) => f.id.kind === 'youtube#video'),
+  //         ]);
+  //         // setTotalItems(resJson.pageInfo.totalResults);
+  //       })
+  //       .catch((error) => {
+  //         console.error('error', error);
+  //       });
+
+  //   fetchData();
+  // }, []);
 
   
 
