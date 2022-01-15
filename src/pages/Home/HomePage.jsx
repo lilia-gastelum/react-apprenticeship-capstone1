@@ -45,7 +45,9 @@ function HomePage({term}) {
       setListVideos([
         ...response.data.items
       ]);
-    })
+    }).catch((error) => {
+              console.error('error', error);
+            });
   }, [term]);
 
   // useEffect(() => {
@@ -66,8 +68,6 @@ function HomePage({term}) {
 
   //   fetchData();
   // }, []);
-
-  
 
   return (
     <Home className="homepage" ref={sectionRef}>

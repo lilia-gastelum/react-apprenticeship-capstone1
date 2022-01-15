@@ -13,6 +13,7 @@ function RelatedVideos({ related }) {
                 header: video?.snippet?.title,
                 as: 'a',
                 description: '',
+                title: 'card',
                 meta: video?.snippet?.channelTitle,
                 onClick: () => history.push('/video', {video: video})
               })
@@ -21,7 +22,7 @@ function RelatedVideos({ related }) {
     };
 
     return (
-        <Item.Group divided items={renderGroup()} />
+        <Item.Group title={'relatedList'} divided items={renderGroup()} />
     );
 }
 

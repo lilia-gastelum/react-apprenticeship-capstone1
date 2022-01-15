@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import VideoPlayer from './VideoPlayer';
 import routeData from 'react-router';
 import axios from 'axios';
-
+import RelatedVideos from './RelatedVideos';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 jest.mock('axios');
 
 const mockLocation = {
@@ -115,9 +117,28 @@ const mockLocation = {
   };
 
 describe('testing video player', () => {
-  it('renders embed', () => {
-    render(<VideoPlayer />);
-    expect(screen.getByTitle('Embedded content from youtube.')).toBeInTheDocument();
+  // it('renders embed', () => {
+  //   render(<VideoPlayer />);
+  //   expect(screen.getByTitle('Embedded content from youtube.')).toBeInTheDocument();
+  // });
+
+  it('renders related list', () => {
+    render(<RelatedVideos related={[]} />);
+    expect(screen.getByTitle('relatedList')).toBeInTheDocument();
+  });
+
+  it('renders related list', () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <RelatedVideos related={model.items} />
+      </Router>
+    );
+    const link = screen.getByTitle('card');
+    expect(link).toBeInTheDocument;
+    fireEvent.click(link);
+    expect(history.length).toBe(2);
+    expect(history.location.pathname).toBe('/video');
   });
 });
 
