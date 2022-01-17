@@ -6,3 +6,11 @@
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
+
+.content.dark>div{
+  color: white !important
+}
+
+.dark{
+  background-color: #584D5F !important
+}

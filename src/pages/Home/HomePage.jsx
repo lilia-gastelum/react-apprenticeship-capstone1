@@ -5,18 +5,18 @@ import './Home.styles.css';
 import gapi from './api';
 import VideoItem from './VideoItem';
 import styled from 'styled-components';
+import { useAppContext } from "../../utils/contexts/AppContext";
 
 const Scroll = styled.div`
   height: 700px;
   overflow-x: hidden;
   overflow-y: auto;
-  margin-bottom: 5px;
 `;
 
 const Home = styled.section`
   text-align: center;
   padding-top: 4.3%;
-  background-color: #fdfdfd;
+  padding-bottom: 4%;
 `;
 
 const Heading = styled.h1`
@@ -25,20 +25,16 @@ const Heading = styled.h1`
   text-align: left !important;
 `;
 
-// const SmallMessage = styled.h5`
-//   text-align: left !important;
-// `;
-
-function HomePage({term}) {
+function HomePage() {
   const sectionRef = useRef(null);
   const [listVideos, setListVideos] = useState([]);
-  // const [totalItems, setTotalItems] = useState(0);
+  const { appContext } = useAppContext();
 
   useEffect(() => {
     gapi.get('/search', {
       params: {
         maxResults: 25,
-        q: term,
+        q: appContext.term,
       type: "video" 
       }
     }).then((response) =>{
@@ -48,7 +44,7 @@ function HomePage({term}) {
     }).catch((error) => {
               console.error('error', error);
             });
-  }, [term]);
+  }, [appContext.term]);
 
   // useEffect(() => {
   //   const fetchData = () =>
@@ -58,23 +54,21 @@ function HomePage({term}) {
   //       .then((response) => response.json())
   //       .then((resJson) => {
   //         setListVideos([
-  //           ...resJson.items.filter((f) => f.id.kind === 'youtube#video'),
+  //           ...resJson.items.filter((f) => f.id.kind === 'youtube#video' && f.snippet && f.snippet.title.toUpperCase().includes(appContext.term.toUpperCase())),
   //         ]);
-  //         // setTotalItems(resJson.pageInfo.totalResults);
   //       })
   //       .catch((error) => {
   //         console.error('error', error);
   //       });
 
   //   fetchData();
-  // }, []);
+  // }, [appContext.term]);
 
   return (
     <Home className="homepage" ref={sectionRef}>
       <Grid>
         <Grid.Column width={16}>
           <Heading>Hi, there!</Heading>
-          {/* <SmallMessage>Showing you {totalItems} results...</SmallMessage> */}
           <Scroll>
             <Grid container doubling columns="4">
               {listVideos.map((video) => {
@@ -82,7 +76,6 @@ function HomePage({term}) {
               })}
             </Grid>
           </Scroll>
-          {/* <Pagination defaultActivePage={1} totalPages={10} /> */}
         </Grid.Column>
       </Grid>
     </Home>

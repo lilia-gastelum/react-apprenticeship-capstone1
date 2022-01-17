@@ -1,9 +1,12 @@
 import React from 'react';
 import { Item } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
+import { useAppContext } from "../../utils/contexts/AppContext";
 
 function RelatedVideos({ related }) {
     const history = useHistory();
+    const { appContext } = useAppContext();
+
     const renderGroup = () => {
         const items = [];
         related.forEach((video, i) => {
@@ -14,9 +17,10 @@ function RelatedVideos({ related }) {
                 as: 'a',
                 description: '',
                 title: 'card',
+                className: appContext.themeIsDark ? 'dark' : '',
                 meta: video?.snippet?.channelTitle,
-                onClick: () => history.push('/video', {video: video})
-              })
+                onClick: () => history.push('/video', { video: video })
+            })
         })
         return items;
     };

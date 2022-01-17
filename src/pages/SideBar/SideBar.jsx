@@ -2,10 +2,11 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useAppContext } from "../../utils/contexts/AppContext";
 
 const SideMenu = styled(Menu)({
   height: '100%',
-  marginTop: '12% !important'
+  marginTop: '12% !important',
 });
 
 const Item = styled(Menu.Item)((props) => ({
@@ -18,10 +19,12 @@ const Item = styled(Menu.Item)((props) => ({
   -webkit-text-fill-color: transparent !important
   `
     : 'transparent',
+  color: props.themeisdark === 'true' ? '#fff !important' : '#red !important'
 }));
 
 function SideBar(props) {
   const history = useHistory();
+  const { appContext } = useAppContext();
   const { logout } = props;
   const [optionMenu, setOptionMenu] = React.useState('home');
 
@@ -31,26 +34,34 @@ function SideBar(props) {
   };
 
   return (
-    <SideMenu fluid vertical tabular>
+    <SideMenu fluid vertical tabular >
       <Item
         icon="home"
         name="home"
         active={optionMenu === 'home'}
+        themeisdark={appContext.themeIsDark.toString()}
         onClick={() => changeMenu('home')}
       />
       <Item
         icon="heart outline"
         name="favorites"
         active={optionMenu === 'favorites'}
+        themeisdark={appContext.themeIsDark.toString()}
         onClick={() => changeMenu('favorites')}
       />
       <Item
         icon="clock outline"
         name="watchLater"
         active={optionMenu === 'watchLater'}
+        themeisdark={appContext.themeIsDark.toString()}
         onClick={() => changeMenu('watchLater')}
       />
-      <Menu.Item name="logOut" icon="log out" onClick={() => logout()} />
+      <Item 
+      themeisdark={appContext.themeIsDark.toString()} 
+      name="logOut" 
+      icon="log out" 
+      onClick={() => logout()} 
+      />
     </SideMenu>
   );
 }

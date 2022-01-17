@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Button, Embed, Grid, Icon } from 'semantic-ui-react';
+import { Button, Embed, Grid, Icon, Popup } from 'semantic-ui-react';
 import RelatedVideos from './RelatedVideos';
 import styled from 'styled-components';
+import './VideoPlayer.styles.css'
 import gapi from '../Home/api';
+import { useAppContext } from "../../utils/contexts/AppContext";
 
 const Scroll = styled.div`
   height: 700px;
@@ -21,6 +23,7 @@ const Container = styled(Grid)({
 });
 function VideoPlayer() {
     const location = useLocation();
+    const { appContext, setAppContext } = useAppContext();
     const [related, setRelated] = useState([]);
     const video = location.state.video;
 
@@ -36,6 +39,24 @@ function VideoPlayer() {
         })
       }, [video]);
 
+    const addToFavorites = () => {
+        setAppContext({ ...appContext, favorites: [...appContext.favorites, video] });
+    };
+
+    const removeFromFavorites = () => {
+        const list = [...appContext.favorites.filter(f => f.id.videoId !== video.id.videoId)];
+        setAppContext({ ...appContext, favorites: list });
+    };
+
+    const addToWatchLater = () => {
+        setAppContext({ ...appContext, watchLater: [...appContext.watchLater, video] });
+    };
+
+    const removeFromWatchLater = () => {
+        const list = [...appContext.watchLater.filter(f => f.id.videoId !== video.id.videoId)];
+        setAppContext({ ...appContext, watchLater: list });
+    };
+
     return (
         <Container>
             <Grid.Row>
@@ -43,30 +64,42 @@ function VideoPlayer() {
                     <Player
                         active={true}
                         id={video.id.videoId}
-                        placeholder='omd.png'
                         source='youtube'
                     />
                     <br />
                     <Grid>
                         <Grid.Row>
-                            <Grid.Column width={12}>
+                            <Grid.Column width={13}>
                                 <h1>{video?.snippet?.title}</h1>
                             </Grid.Column>
-                            <Grid.Column width={2}>
-                            <Button animated='fade' basic color={'purple'}>
-                                <Button.Content hidden><Icon name='heart' /></Button.Content>
-                                <Button.Content visible>
-                                    Add to favorites
-                                </Button.Content>
-                            </Button>
+                            <Grid.Column width={1}>
+                                <Popup
+                                    content={appContext.favorites.find(f => f.id.videoId === video.id.videoId) ? 'Remove from favorites' : 'Add to favorites'}
+                                    trigger={
+                                        <Button
+                                            basic={!appContext.favorites.find(f => f.id.videoId === video.id.videoId)}
+                                            color={'purple'}
+                                            onClick={appContext.favorites.find(f => f.id.videoId === video.id.videoId) ? removeFromFavorites : addToFavorites}
+                                        >
+                                            <Button.Content><Icon name='heart' /></Button.Content>
+                                        </Button>
+                                    }
+                                />
                             </Grid.Column>
-                            <Grid.Column width={2}>
-                                <Button animated='fade' basic color={'orange'}>
-                                <Button.Content hidden><Icon name='clock' /></Button.Content>
-                                <Button.Content visible>
-                                    Watch later
-                                </Button.Content>
-                                </Button>
+                            <Grid.Column width={1}>
+                                <Popup
+                                    content={appContext.watchLater.find(f => f.id.videoId === video.id.videoId) ? 'Remove from watch later' : 'Watch later'}
+                                    trigger={
+                                        <Button
+                                            basic={!appContext.watchLater.find(f => f.id.videoId === video.id.videoId)}
+                                            color={'orange'}
+                                            onClick={appContext.watchLater.find(f => f.id.videoId === video.id.videoId) ? removeFromWatchLater : addToWatchLater}
+                                        >
+                                            <Button.Content><Icon name='clock' /></Button.Content>
+                                        </Button>
+                                    }
+                                />
+
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

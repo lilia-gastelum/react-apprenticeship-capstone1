@@ -5,10 +5,20 @@ import './Layout.styles.css';
 import { useAuth } from '../../providers/Auth';
 import SideBar from '../../pages/SideBar';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import { useAppContext } from "../../utils/contexts/AppContext";
 
 // eslint-disable-next-line react/prop-types
-function Layout({ setTerm, children }) {
+
+const Main = styled.main`
+  height: 100%;
+  background-color: ${ (props) => props.themeIsDark ? '#322A37' : '#fdfdfd'};
+  color: ${ (props) => props.themeIsDark ? '#fff' : '#000'};
+`;
+
+function Layout({ children }) {
   const { authenticated, logout } = useAuth();
+  const { appContext } = useAppContext();
   const history = useHistory();
 
   function deAuthenticate(event) {
@@ -18,8 +28,8 @@ function Layout({ setTerm, children }) {
   }
 
   return (
-    <main title="main" className="container">
-      <Header setTerm={setTerm}/>
+    <Main title="main" className="container" themeIsDark={appContext.themeIsDark}>
+      <Header />
       <Grid>
       {authenticated && (
           <Grid.Column width={3}>
@@ -30,7 +40,7 @@ function Layout({ setTerm, children }) {
           {children}
         </Grid.Column>
       </Grid>
-    </main>
+    </Main>
   );
 }
 
