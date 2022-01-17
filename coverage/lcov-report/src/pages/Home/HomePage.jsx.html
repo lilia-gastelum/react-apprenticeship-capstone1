@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">18.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>3/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">18.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>3/16</span>
             </div>
         
             
@@ -173,38 +173,38 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -258,39 +258,39 @@ function <span class="fstat-no" title="function not covered" >HomePage(</span>) 
   const [listVideos, setListVideos] = <span class="cstat-no" title="statement not covered" >useState([]);</span>
   const { appContext } = <span class="cstat-no" title="statement not covered" >useAppContext();</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    gapi.get('/search', {</span>
-      params: {
-        maxResults: 25,
-        q: appContext.term,
-      type: "video" 
-      }
-    }).then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt;{
-<span class="cstat-no" title="statement not covered" >      setListVideos([</span>
-        ...response.data.items
-      ]);
-    }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >              console.error('error', error);</span>
-            });
-  }, [appContext.term]);
-&nbsp;
   // useEffect(() =&gt; {
-  //   const fetchData = () =&gt;
-  //     fetch(
-  //       'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
-  //     )
-  //       .then((response) =&gt; response.json())
-  //       .then((resJson) =&gt; {
-  //         setListVideos([
-  //           ...resJson.items.filter((f) =&gt; f.id.kind === 'youtube#video' &amp;&amp; f.snippet &amp;&amp; f.snippet.title.toUpperCase().includes(appContext.term.toUpperCase())),
-  //         ]);
-  //       })
-  //       .catch((error) =&gt; {
-  //         console.error('error', error);
-  //       });
-&nbsp;
-  //   fetchData();
+  //   gapi.get('/search', {
+  //     params: {
+  //       maxResults: 25,
+  //       q: appContext.term,
+  //     type: "video" 
+  //     }
+  //   }).then((response) =&gt;{
+  //     setListVideos([
+  //       ...response.data.items
+  //     ]);
+  //   }).catch((error) =&gt; {
+  //             console.error('error', error);
+  //           });
   // }, [appContext.term]);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+    const fetchData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt;</span>
+<span class="cstat-no" title="statement not covered" >      fetch(</span>
+        'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
+      )
+        .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; <span class="cstat-no" title="statement not covered" >response.json())</span>
+        .then(<span class="fstat-no" title="function not covered" >(r</span>esJson) =&gt; {
+<span class="cstat-no" title="statement not covered" >          setListVideos([</span>
+            ...resJson.items.filter(<span class="fstat-no" title="function not covered" >(f</span>) =&gt; <span class="cstat-no" title="statement not covered" >f.id.kind === 'youtube#video' &amp;&amp; f.snippet &amp;&amp; f.snippet.title.toUpperCase().includes(appContext.term.toUpperCase()))</span>,
+          ]);
+        })
+        .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >          console.error('error', error);</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    fetchData();</span>
+  }, [appContext.term]);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;Home className="homepage" ref={sectionRef}&gt;
@@ -318,7 +318,7 @@ export default HomePage;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Jan 16 2022 18:01:16 GMT-0700 (Mexican Pacific Standard Time)
+                at Sun Jan 16 2022 18:36:32 GMT-0700 (Mexican Pacific Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

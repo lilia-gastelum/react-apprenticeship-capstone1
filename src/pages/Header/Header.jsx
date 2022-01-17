@@ -31,7 +31,7 @@ const SearchInput = styled(Input)({
   width: '100% !important',
 });
 
-function Header() {
+function Header({setOpen}) {
   const { authenticated, user, logout } = useAuth();
   const { appContext, setAppContext } = useAppContext();
   const history = useHistory();
@@ -62,15 +62,14 @@ function Header() {
         {!authenticated ? (
           <Item
             name="log in"
-            onClick={() => {
-              history.push('/login');
-            }}
+            onClick={() => setOpen(true)}
           />
         ) : (
-          <UserMenu item text={user ? user.username : '@username'}>
+          <UserMenu item text={user ? user.name : '@username'}>
             <Dropdown.Menu>
-              <Dropdown.Item>Home</Dropdown.Item>
-              <Dropdown.Item>Favorites</Dropdown.Item>
+              <Dropdown.Item onClick={() => history.push('/home')}>Home</Dropdown.Item>
+              <Dropdown.Item onClick={() => history.push('/favorites')}>Favorites</Dropdown.Item>
+              <Dropdown.Item onClick={() => history.push('/watchLater')}>Watch later</Dropdown.Item>
               <Dropdown.Item
                 onClick={() => {
                   logout();

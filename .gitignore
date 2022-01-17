@@ -9,3 +9,12 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore test-related files
+/coverage.data
+/coverage/
+.coverage
+.coverage.*
+
+/build
+/build/**

@@ -3,6 +3,7 @@ import { Menu } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useAppContext } from "../../utils/contexts/AppContext";
+import { useAuth } from '../../providers/Auth';
 
 const SideMenu = styled(Menu)({
   height: '100%',
@@ -22,10 +23,10 @@ const Item = styled(Menu.Item)((props) => ({
   color: props.themeisdark === 'true' ? '#fff !important' : '#red !important'
 }));
 
-function SideBar(props) {
+function SideBar() {
   const history = useHistory();
+  const { logout } = useAuth();
   const { appContext } = useAppContext();
-  const { logout } = props;
   const [optionMenu, setOptionMenu] = React.useState('home');
 
   const changeMenu = (option) => {
@@ -60,7 +61,9 @@ function SideBar(props) {
       themeisdark={appContext.themeIsDark.toString()} 
       name="logOut" 
       icon="log out" 
-      onClick={() => logout()} 
+      onClick={() => {
+        logout();
+      }} 
       />
     </SideMenu>
   );

@@ -22,7 +22,6 @@ const Home = styled.section`
 const Heading = styled.h1`
   font-size: 3rem;
   letter-spacing: -2px;
-  text-align: left !important;
 `;
 
 function HomePage() {
@@ -30,39 +29,39 @@ function HomePage() {
   const [listVideos, setListVideos] = useState([]);
   const { appContext } = useAppContext();
 
-  useEffect(() => {
-    gapi.get('/search', {
-      params: {
-        maxResults: 25,
-        q: appContext.term,
-      type: "video" 
-      }
-    }).then((response) =>{
-      setListVideos([
-        ...response.data.items
-      ]);
-    }).catch((error) => {
-              console.error('error', error);
-            });
-  }, [appContext.term]);
-
   // useEffect(() => {
-  //   const fetchData = () =>
-  //     fetch(
-  //       'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
-  //     )
-  //       .then((response) => response.json())
-  //       .then((resJson) => {
-  //         setListVideos([
-  //           ...resJson.items.filter((f) => f.id.kind === 'youtube#video' && f.snippet && f.snippet.title.toUpperCase().includes(appContext.term.toUpperCase())),
-  //         ]);
-  //       })
-  //       .catch((error) => {
-  //         console.error('error', error);
-  //       });
-
-  //   fetchData();
+  //   gapi.get('/search', {
+  //     params: {
+  //       maxResults: 25,
+  //       q: appContext.term,
+  //     type: "video" 
+  //     }
+  //   }).then((response) =>{
+  //     setListVideos([
+  //       ...response.data.items
+  //     ]);
+  //   }).catch((error) => {
+  //             console.error('error', error);
+  //           });
   // }, [appContext.term]);
+
+  useEffect(() => {
+    const fetchData = () =>
+      fetch(
+        'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
+      )
+        .then((response) => response.json())
+        .then((resJson) => {
+          setListVideos([
+            ...resJson.items.filter((f) => f.id.kind === 'youtube#video' && f.snippet && f.snippet.title.toUpperCase().includes(appContext.term.toUpperCase())),
+          ]);
+        })
+        .catch((error) => {
+          console.error('error', error);
+        });
+
+    fetchData();
+  }, [appContext.term]);
 
   return (
     <Home className="homepage" ref={sectionRef}>
@@ -72,7 +71,7 @@ function HomePage() {
           <Scroll>
             <Grid container doubling columns="4">
               {listVideos.map((video) => {
-                return <VideoItem key={video.etag} video={video} />;
+                return <VideoItem key={video.etag} video={video} from={'home'} />;
               })}
             </Grid>
           </Scroll>

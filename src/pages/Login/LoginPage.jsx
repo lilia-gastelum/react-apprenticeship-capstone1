@@ -1,38 +1,86 @@
-import React from 'react';
-import { useHistory } from 'react-router';
+import React, { useState } from 'react';
+import { Button, Form, Header, Icon, Loader, Modal } from 'semantic-ui-react';
 
 import { useAuth } from '../../providers/Auth';
 import './Login.styles.css';
 
-function LoginPage() {
+function LoginPage({ open, setOpen }) {
   const { login } = useAuth();
-  const history = useHistory();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
-  function authenticate(event) {
-    event.preventDefault();
-    login();
-    history.push('/home');
+  async function authenticate() {
+    if (username !== '' && password !== '') {
+      setLoading(true);
+      login(username, password).then(() => {
+        setOpen(false);
+        setLoading(false);
+        setUsername('');
+        setPassword('');
+      }).catch(error => {
+        setMessage(error.message)
+        setLoading(false);
+      })
+
+    }
   }
 
   return (
-    <section className="login">
-      <h1>Welcome back!</h1>
-      <form onSubmit={authenticate} className="login-form">
-        <div className="form-group">
-          <label htmlFor="username">
-            <strong>username </strong>
-            <input required type="text" id="username" />
-          </label>
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">
-            <strong>password </strong>
-            <input required type="password" id="password" />
-          </label>
-        </div>
-        <button type="submit">login</button>
-      </form>
-    </section>
+
+    <Modal
+      basic
+      dimmer={'blurring'}
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      open={open}
+      size='small'
+    >
+      <Header icon>
+        <Icon name='user' />
+        Log In
+      </Header>
+      <Modal.Content>
+        <p>
+          Walcome back!
+        </p>
+        <Form>
+          <Form.Input
+            required
+            label={"Username"}
+            placeholder={"username"}
+            type="text"
+            value={username}
+            onChange={(e) => {
+              setMessage('');
+              setUsername(e.target.value)
+            }}
+          />
+          <br />
+          <Loader disabled={!loading} />
+          <Form.Input
+            required
+            type="password"
+            label={"Password"}
+            value={password}
+            onChange={(e) => {
+              setMessage('');
+              setPassword(e.target.value)
+            }}
+          />
+        </Form>
+        <label>{message}</label>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button basic color='red' inverted onClick={() => setOpen(false)}>
+          <Icon name='remove' /> Cancel
+        </Button>
+        <Button type='button' color='green' inverted onClick={() => authenticate()}>
+          <Icon name='sign in' /> Log In
+        </Button>
+      </Modal.Actions>
+    </Modal>
   );
 }
 

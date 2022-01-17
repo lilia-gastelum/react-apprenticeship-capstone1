@@ -3,7 +3,7 @@ import { Item } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import { useAppContext } from "../../utils/contexts/AppContext";
 
-function RelatedVideos({ related }) {
+function RelatedVideos({ related, from }) {
     const history = useHistory();
     const { appContext } = useAppContext();
 
@@ -19,7 +19,7 @@ function RelatedVideos({ related }) {
                 title: 'card',
                 className: appContext.themeIsDark ? 'dark' : '',
                 meta: video?.snippet?.channelTitle,
-                onClick: () => history.push('/video', { video: video })
+                onClick: () => history.push(`/video/${video.id.videoId}`, { video: video, from })
             })
         })
         return items;
