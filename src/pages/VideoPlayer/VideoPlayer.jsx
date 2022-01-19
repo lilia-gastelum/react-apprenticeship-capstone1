@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Button, Embed, Grid, Icon, Popup } from 'semantic-ui-react';
+import { Button, Embed, Grid, Icon } from 'semantic-ui-react';
 import RelatedVideos from './RelatedVideos';
 import styled from 'styled-components';
 import './VideoPlayer.styles.css'
@@ -8,7 +8,7 @@ import gapi from '../Home/api';
 import { useAuth } from '../../providers/Auth';
 import { storage } from '../../utils/storage';
 import { FAVORITES_LIST, WATCH_LATER_LIST } from '../../utils/constants';
-import { relatedResult } from './mock';
+// import { relatedResult } from './mock';
 import { useHistory } from 'react-router-dom';
 import NotFound from '../../components/NotFound';
 
@@ -16,7 +16,7 @@ const Scroll = styled.div`
   height: 700px;
   overflow-x: hidden;
   overflow-y: auto;
-  margin-bottom: 5px;ß
+  margin-bottom: 5px;
 `;
 
 const Player = styled(Embed)({
@@ -41,30 +41,26 @@ function VideoPlayer() {
 
     useEffect(() => {
         if (video) {
-            console.log('cambia video')
-            console.log(video.id.videoId)
-            if (from === 'home') {
-                setRelated(relatedResult);
-                // gapi.get('/search', {
-                //     params: {
-                //       maxResults: 15,
-                //       relatedToVideoId: video.id.videoId,
-                //       type: "video"
-                //     }
-                //   }).then((response) =>{
-                //     setRelated([...response.data.items]);
-                //   })
+            if (from === 'home' && gapi) {
+                // setRelated(relatedResult);
+                gapi.get('/search', {
+                    params: {
+                      maxResults: 15,
+                      relatedToVideoId: video.id.videoId,
+                      type: "video"
+                    }
+                  }).then((response) =>{
+                    setRelated([...response.data.items]);
+                  });
             }
 
             if (from === 'favorites') {
                 const favList = storage.get(FAVORITES_LIST);
-                console.log([...favList.filter(f => f.id.videoId !== video.id.videoId)])
                 setRelated([...favList.filter(f => f.id.videoId !== video.id.videoId)])
             }
 
             if (from === 'watchLater') {
                 const latList = storage.get(WATCH_LATER_LIST);
-                console.log([...latList.filter(f => f.id.videoId !== video.id.videoId)])
                 setRelated([...latList.filter(f => f.id.videoId !== video.id.videoId)])
             }
         }
@@ -133,32 +129,34 @@ function VideoPlayer() {
                             {authenticated && (
                                 <>
                                     <Grid.Column width={1}>
-                                        <Popup
+                                        {/* <Popup
                                             content={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-                                            trigger={
+                                            trigger={ */}
                                                 <Button
+                                                    title={'favorite'}
                                                     basic={!isFavorite}
                                                     color={'purple'}
                                                     onClick={isFavorite ? removeFromFavorites : addToFavorites}
                                                 >
                                                     <Button.Content><Icon name='heart' /></Button.Content>
                                                 </Button>
-                                            }
-                                        />
+                                            {/* } */}
+                                        {/* /> */}
                                     </Grid.Column>
                                     <Grid.Column width={1}>
-                                        <Popup
+                                        {/* <Popup
                                             content={isWatchLater ? 'Remove from watch later' : 'Watch later'}
-                                            trigger={
+                                            trigger={ */}
                                                 <Button
+                                                    title={'watchLater'}
                                                     basic={!isWatchLater}
                                                     color={'orange'}
                                                     onClick={isWatchLater ? removeFromWatchLater : addToWatchLater}
                                                 >
                                                     <Button.Content><Icon name='clock' /></Button.Content>
                                                 </Button>
-                                            }
-                                        />
+                                            {/* }
+                                        /> */}
                                     </Grid.Column>
                                 </>
                             )}

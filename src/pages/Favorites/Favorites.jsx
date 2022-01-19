@@ -26,7 +26,7 @@ const Heading = styled.h1`
 
 function Favorites() {
     const sectionRef = useRef(null);
-    const listVideos = storage.get(FAVORITES_LIST);
+    const listVideos = storage.get(FAVORITES_LIST) || [];
 
     return (
         <Home className="homepage" ref={sectionRef}>

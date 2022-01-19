@@ -50,6 +50,7 @@ function LoginPage({ open, setOpen }) {
             required
             label={"Username"}
             placeholder={"username"}
+            title={"username"}
             type="text"
             value={username}
             onChange={(e) => {
@@ -63,6 +64,7 @@ function LoginPage({ open, setOpen }) {
             required
             type="password"
             label={"Password"}
+            title={"password"}
             value={password}
             onChange={(e) => {
               setMessage('');

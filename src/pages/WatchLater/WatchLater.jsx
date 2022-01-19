@@ -26,7 +26,7 @@ const Heading = styled.h1`
 
 function WatchLater() {
   const sectionRef = useRef(null);
-  const listVideos = storage.get(WATCH_LATER_LIST);
+  const listVideos = storage.get(WATCH_LATER_LIST) || [];
 
   return (
     <Home className="homepage" ref={sectionRef}>

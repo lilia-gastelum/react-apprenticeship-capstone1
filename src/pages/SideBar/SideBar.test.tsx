@@ -4,12 +4,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import SideBar from './SideBar';
 import { Router } from 'react-router-dom';
 import { AppContextProvider } from "../../utils/contexts/AppContext";
+import AuthProvider from '../../providers/Auth';
 
 describe('renders side bar', () => {
     it('must display message', () => {
         render(
             <AppContextProvider>
-                <SideBar />
+                <AuthProvider>
+                    <SideBar />
+                </AuthProvider>
             </AppContextProvider>
         );
 
@@ -22,9 +25,11 @@ describe('renders side bar', () => {
         const history = createMemoryHistory();
         render(
             <AppContextProvider>
-                <Router history={history}>
-                    <SideBar />
-                </Router>
+                <AuthProvider>
+                    <Router history={history}>
+                        <SideBar />
+                    </Router>
+                </AuthProvider>
             </AppContextProvider>
         );
         const button = screen.getByText('Home');
@@ -38,9 +43,11 @@ describe('renders side bar', () => {
         const history = createMemoryHistory();
         render(
             <AppContextProvider>
-                <Router history={history}>
-                    <SideBar />
-                </Router>
+                <AuthProvider>
+                    <Router history={history}>
+                        <SideBar />
+                    </Router>
+                </AuthProvider>
             </AppContextProvider>
         );
         const button = screen.getByText('Favorites');
@@ -54,9 +61,11 @@ describe('renders side bar', () => {
         const history = createMemoryHistory();
         render(
             <AppContextProvider>
-                <Router history={history}>
-                    <SideBar />
-                </Router>
+                <AuthProvider>
+                    <Router history={history}>
+                        <SideBar />
+                    </Router>
+                </AuthProvider>
             </AppContextProvider>
         );
         const button = screen.getByText('Watch Later');

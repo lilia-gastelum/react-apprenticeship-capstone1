@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>18/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/7</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>18/21</span>
             </div>
         
             
@@ -179,17 +179,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,15 +210,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -267,7 +267,7 @@ const SearchInput = styled(Input)({
   width: '100% !important',
 });
 &nbsp;
-function Header() {
+function Header({setOpen}) {
   const { authenticated, user, logout } = useAuth();
   const { appContext, setAppContext } = useAppContext();
   const history = useHistory();
@@ -275,6 +275,7 @@ function Header() {
   const onKeyPress = (event) =&gt; {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (event.key === 'Enter' &amp;&amp; event.target.value !== '') {
       setAppContext({...appContext, term: event.target.value});
+      history.push('/home');
     }
   };
 &nbsp;
@@ -298,15 +299,14 @@ function Header() {
         {!authenticated ? (
           &lt;Item
             name="log in"
-            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >              history.push('/login');</span>
-            }}
+            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setOpen(true)}</span>
           /&gt;
         ) : (
-<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;UserMenu item text={user ? user.username : '@username'}&gt;</span>
+          &lt;UserMenu item text={user ? <span class="branch-0 cbranch-no" title="branch not covered" >user.name </span>: '@username'}&gt;
             &lt;Dropdown.Menu&gt;
-              &lt;Dropdown.Item&gt;Home&lt;/Dropdown.Item&gt;
-              &lt;Dropdown.Item&gt;Favorites&lt;/Dropdown.Item&gt;
+              &lt;Dropdown.Item onClick={() =&gt; history.push('/home')}&gt;Home&lt;/Dropdown.Item&gt;
+              &lt;Dropdown.Item onClick={() =&gt; history.push('/favorites')}&gt;Favorites&lt;/Dropdown.Item&gt;
+              &lt;Dropdown.Item onClick={() =&gt; history.push('/watchLater')}&gt;Watch later&lt;/Dropdown.Item&gt;
               &lt;Dropdown.Item
                 onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >                  logout();</span>
@@ -330,7 +330,7 @@ export default Header;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Jan 16 2022 18:36:32 GMT-0700 (Mexican Pacific Standard Time)
+                at Wed Jan 19 2022 13:54:17 GMT-0700 (Mexican Pacific Standard Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>
