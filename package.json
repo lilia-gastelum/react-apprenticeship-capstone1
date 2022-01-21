@@ -6,16 +6,21 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.1.3",
+    "jest-environment-jsdom-sixteen": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4",
+    "styled-components": "^5.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter --env=jest-environment-jsdom-sixteen",
+    "test:coverage": "jest --watch --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx",
     "lint:fix": "eslint ./src --ext .js,.jsx --fix",
@@ -24,6 +29,8 @@
     "verify": "npm run lint && npm run stylelint "
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/react": "^17.0.38",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
@@ -34,11 +41,16 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.1.0",
     "husky": "^7.0.0",
+    "jest": "24.9",
+    "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^10.2.13",
     "prettier": "^2.5.1",
     "pretty-quick": "^3.0.0",
+    "sonarqube-scanner": "^2.8.1",
     "stylelint": "^14.2.0",
-    "stylelint-config-standard": "^24.0.0"
+    "stylelint-config-standard": "^24.0.0",
+    "supertest": "^6.2.1",
+    "typescript": "^3.9.10"
   },
   "browserslist": {
     "production": [
@@ -62,6 +74,11 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
+    },
+    "jest": {
+      "coverageReporters": [
+        "text-summary"
+      ]
     }
   }
 }
