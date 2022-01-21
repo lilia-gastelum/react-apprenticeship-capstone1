@@ -39,6 +39,7 @@ function Header({setOpen}) {
   const onKeyPress = (event) => {
     if (event.key === 'Enter' && event.target.value !== '') {
       setAppContext({...appContext, term: event.target.value});
+      history.push('/home');
     }
   };
 

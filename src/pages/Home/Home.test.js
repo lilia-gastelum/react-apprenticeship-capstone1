@@ -79,42 +79,61 @@ global.fetch = jest.fn(() =>
   })
 );
 
-// describe('renders total items message', () => {
-//   it('must display message', async () => {
-//     await waitFor(() => {
-//       render(
-//         <HomePage />
+describe('renders total items message', () => {
+  it('must display message', async () => {
+
+//     axios.get.mockResolvedValueOnce(model);
+//       const result = await fetchVideos();
+//       expect(axios.get).toHaveBeenCalledWith(
+//         '/search', {
+//         params: {
+//           maxResults: 25,
+//           q: 'wizeline',
+//           type: "video"
+//         }
+//       }
 //       );
-//     });
 
-//     const message = screen.getByText(/Hi, there!/i);
-//     expect(message).toBeInTheDocument();
-//   });
+    await waitFor(() => {
+      render(
+      <AppContextProvider>
+      <HomePage />
+      </AppContextProvider>
+      );
+    });
 
-//   it('fetch catches error', async () => {
-//     global.fetch.mockReturnValueOnce(Promise.reject());
-//     await waitFor(() => {
-//       render(
-//         <HomePage />
-//       );
-//     });
+    const message = screen.getByText(/Hi, there!/i);
+    expect(message).toBeInTheDocument();
+  });
 
-//     const message = screen.getByText(/Hi, there!/i);
-//     expect(message).toBeInTheDocument();
-//   });
+  // it('fetch catches error', async () => {
+  //   global.fetch.mockReturnValueOnce(Promise.reject());
+  //   await waitFor(() => {
+  //     render(
+  //     <AppContextProvider>
+  //     <HomePage />
+  //     </AppContextProvider>
+  //     );
+  //   });
 
-//   it('log out button', async () => {
+  //   const message = screen.getByText(/Hi, there!/i);
+  //   expect(message).toBeInTheDocument();
+  // });
 
-//     await waitFor(() => {
-//       render(
-//         <HomePage />
-//       );
-//     });
+  // it('log out button', async () => {
 
-//     const message = screen.getByText(/Hi, there!/i);
-//     expect(message).toBeInTheDocument();
-//   });
-// });
+  //   await waitFor(() => {
+  //     render(
+  //     <AppContextProvider>
+  //     <HomePage />
+  //     </AppContextProvider>
+  //     );
+  //   });
+
+  //   const message = screen.getByText(/Hi, there!/i);
+  //   expect(message).toBeInTheDocument();
+  // });
+});
 
 describe('renders video item', () => {
   it('must display thumbnail', () => {
@@ -144,7 +163,7 @@ describe('renders video item', () => {
 
     fireEvent.click(button);
     expect(history.length).toBe(2);
-    expect(history.location.pathname).toBe('/video');
+    expect(history.location.pathname).toMatch('/video/');
   });
 });
 

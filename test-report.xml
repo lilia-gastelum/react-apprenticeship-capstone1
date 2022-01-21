@@ -1,40 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/utils/utils.test.js">
-    <testCase name="should get value" duration="16"/>
-  </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/utils/hooks/useFortune.test.tsx">
-    <testCase name="should get value" duration="56"/>
+    <testCase name="should get value" duration="54"/>
   </file>
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Login/Login.test.js">
-    <testCase name="renders login must display form" duration="60"/>
-    <testCase name="renders login logs in" duration="38"/>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/providers/Auth/Auth.provider.test.jsx">
+    <testCase name="should get value" duration="63"/>
   </file>
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/VideoPlayer/VideoPlayer.test.js">
-    <testCase name="testing video player renders related list" duration="27"/>
-    <testCase name="testing video player renders related list" duration="30"/>
-    <testCase name="fetchRelatedData if API call is successful should return related videos list" duration="5"/>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/utils/utils.test.js">
+    <testCase name="should get value" duration="31"/>
+    <testCase name="should get storage" duration="4"/>
+    <testCase name="storage catches error" duration="10"/>
   </file>
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/components/Layout/Layout.test.js">
-    <testCase name="renders layout must display form" duration="56"/>
-  </file>
-  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Home/Home.test.js">
-    <testCase name="renders video item must display thumbnail" duration="30"/>
-    <testCase name="renders video item redirects to video player" duration="19"/>
-    <testCase name="fetchData when API call is successful should return video list" duration="2"/>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Favorites/Favorites.test.js">
+    <testCase name="renders total items  must display list" duration="52"/>
+    <testCase name="renders video item must display thumbnail" duration="21"/>
+    <testCase name="renders video item redirects to video player" duration="32"/>
   </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/SideBar/SideBar.test.tsx">
-    <testCase name="renders side bar must display message" duration="52"/>
-    <testCase name="renders side bar change option home" duration="19"/>
-    <testCase name="renders side bar change option favorites" duration="12"/>
-    <testCase name="renders side bar change option watch later" duration="12"/>
+    <testCase name="renders side bar must display message" duration="69"/>
+    <testCase name="renders side bar change option home" duration="40"/>
+    <testCase name="renders side bar change option favorites" duration="38"/>
+    <testCase name="renders side bar change option watch later" duration="23"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Home/Home.test.js">
+    <testCase name="renders total items message must display message" duration="75"/>
+    <testCase name="renders video item must display thumbnail" duration="36"/>
+    <testCase name="renders video item redirects to video player" duration="28"/>
+    <testCase name="fetchData when API call is successful should return video list" duration="4"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/components/Layout/Layout.test.js">
+    <testCase name="renders layout must display form logged" duration="190"/>
+    <testCase name="renders layout must display form logged out" duration="32"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Login/Login.test.js">
+    <testCase name="renders login must display form" duration="136"/>
+    <testCase name="renders login logs in" duration="271"/>
   </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/components/App/App.test.js">
-    <testCase name="renders app must display app" duration="64"/>
+    <testCase name="renders app must display app" duration="138"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/WatchLater/WatchLater.test.js">
+    <testCase name="renders total items  must display list" duration="46"/>
+    <testCase name="renders video item must display thumbnail" duration="15"/>
+    <testCase name="renders video item redirects to video player" duration="16"/>
+  </file>
+  <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/VideoPlayer/VideoPlayer.test.js">
+    <testCase name="testing video player Renders from favorites with no state" duration="80"/>
+    <testCase name="testing video player Renders from favorites with no list" duration="287"/>
+    <testCase name="testing video player Renders from favorites with video in list" duration="99"/>
+    <testCase name="testing video player Renders from watch later with no list" duration="52"/>
+    <testCase name="testing video player Renders from favorites with video in list" duration="63"/>
+    <testCase name="testing video player Renders from unlogged" duration="21"/>
+    <testCase name="testing video player Renders from unlogged" duration="18"/>
+    <testCase name="testing video player renders related list" duration="5"/>
+    <testCase name="testing video player renders related list" duration="6"/>
+    <testCase name="fetchRelatedData if API call is successful should return related videos list" duration="2"/>
   </file>
   <file path="/Users/lilia.gastelum/Documents/Projects/react-apprenticeship-capstone1/src/pages/Header/Header.test.js">
-    <testCase name="renders header must display menu" duration="59"/>
-    <testCase name="renders header it goes to home on click" duration="18"/>
-    <testCase name="renders header Search input allows writing" duration="58"/>
+    <testCase name="renders header must display menu" duration="82"/>
+    <testCase name="renders header it goes to home on click" duration="30"/>
+    <testCase name="renders header Search input allows writing" duration="87"/>
+    <testCase name="renders header change options" duration="142"/>
   </file>
 </testExecutions>

@@ -29,39 +29,41 @@ function HomePage() {
   const [listVideos, setListVideos] = useState([]);
   const { appContext } = useAppContext();
 
-  // useEffect(() => {
-  //   gapi.get('/search', {
-  //     params: {
-  //       maxResults: 25,
-  //       q: appContext.term,
-  //     type: "video" 
-  //     }
-  //   }).then((response) =>{
-  //     setListVideos([
-  //       ...response.data.items
-  //     ]);
-  //   }).catch((error) => {
-  //             console.error('error', error);
-  //           });
-  // }, [appContext.term]);
-
   useEffect(() => {
-    const fetchData = () =>
-      fetch(
-        'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
-      )
-        .then((response) => response.json())
-        .then((resJson) => {
-          setListVideos([
-            ...resJson.items.filter((f) => f.id.kind === 'youtube#video' && f.snippet && f.snippet.title.toUpperCase().includes(appContext.term.toUpperCase())),
-          ]);
-        })
-        .catch((error) => {
-          console.error('error', error);
-        });
-
-    fetchData();
+    if(gapi){
+      gapi.get('/search', {
+        params: {
+          maxResults: 25,
+          q: appContext.term,
+        type: "video" 
+        }
+      }).then((response) =>{
+        setListVideos([
+          ...response.data.items
+        ]);
+      }).catch((error) => {
+                console.error('error', error);
+              });
+    }
   }, [appContext.term]);
+
+  // useEffect(() => {
+  //   const fetchData = () =>
+  //     fetch(
+  //       'https://raw.githubusercontent.com/wizelineacademy/react-gist/main/capstone-project-1/mocks/youtube-videos-mock.json'
+  //     )
+  //       .then((response) => response.json())
+  //       .then((resJson) => {
+  //         setListVideos([
+  //           ...resJson.items.filter((f) => f.id.kind === 'youtube#video' && f.snippet && f.snippet.title.toUpperCase().includes(appContext.term.toUpperCase())),
+  //         ]);
+  //       })
+  //       .catch((error) => {
+  //         console.error('error', error);
+  //       });
+
+  //   fetchData();
+  // }, [appContext.term]);
 
   return (
     <Home className="homepage" ref={sectionRef}>

@@ -20,7 +20,7 @@ function VideoItem(props) {
             <Thumbnail 
             $themeisdark={appContext.themeIsDark} 
             className="selectable" 
-            onClick={() => { history.push(`/video/${video.id.videoId}`, { video: video, from }) }}
+            onClick={() => { history.push(`/video/${video?.id?.videoId}`, { video: video, from }) }}
             >
                 <Image alt={'thumbnail'} src={video?.snippet?.thumbnails?.high?.url} />
                 <Card.Content className={appContext.themeIsDark ? 'dark' : ''}>
