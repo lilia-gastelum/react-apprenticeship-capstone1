@@ -1,0 +1,7 @@
+.dark>.content>div{
+    color: #fff !important;
+}
+
+.dark:hover > .content > div{
+    color: darkorange !important;
+}

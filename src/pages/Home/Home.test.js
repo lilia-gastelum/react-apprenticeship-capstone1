@@ -5,6 +5,7 @@ import VideoItem from './VideoItem';
 import axios from 'axios';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
+import { AppContextProvider } from "../../utils/contexts/AppContext";
 
 jest.mock('axios');
 
@@ -12,12 +13,12 @@ const fetchVideos = async () => {
   try {
     return await axios.get(
       '/search', {
-            params: {
-              maxResults: 25,
-              q: 'wizeline',
-            type: "video" 
-            }
-          }
+      params: {
+        maxResults: 25,
+        q: 'wizeline',
+        type: "video"
+      }
+    }
     );
   } catch (e) {
     return [];
@@ -117,7 +118,11 @@ global.fetch = jest.fn(() =>
 
 describe('renders video item', () => {
   it('must display thumbnail', () => {
-    render(<VideoItem />);
+    render(
+      <AppContextProvider>
+        <VideoItem />
+      </AppContextProvider>
+    );
 
     const message = screen.getByAltText(/thumbnail/i);
     expect(message).toBeInTheDocument();
@@ -125,16 +130,18 @@ describe('renders video item', () => {
 
   test('redirects to video player', () => {
     const history = createMemoryHistory();
-  
+
     render(
-      <Router history={history}>
-        <VideoItem />
-      </Router>
+      <AppContextProvider>
+        <Router history={history}>
+          <VideoItem />
+        </Router>
+      </AppContextProvider>
     );
-  
+
     const button = screen.getByAltText(/thumbnail/i);
     expect(button).toBeInTheDocument();
-  
+
     fireEvent.click(button);
     expect(history.length).toBe(2);
     expect(history.location.pathname).toBe('/video');
@@ -149,12 +156,12 @@ describe("fetchData", () => {
       const result = await fetchVideos();
       expect(axios.get).toHaveBeenCalledWith(
         '/search', {
-              params: {
-                maxResults: 25,
-                q: 'wizeline',
-              type: "video" 
-              }
-            }
+        params: {
+          maxResults: 25,
+          q: 'wizeline',
+          type: "video"
+        }
+      }
       );
       expect(result).toEqual(model);
     });

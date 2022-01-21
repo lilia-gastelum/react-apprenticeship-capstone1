@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Checkbox, Dropdown, Icon, Input, Menu } from 'semantic-ui-react';
 import { useAuth } from '../../providers/Auth';
 import styled from 'styled-components';
+import { useAppContext } from "../../utils/contexts/AppContext";
+
+
 const TopMenu = styled(Menu)({
   backgroundImage: `
   -webkit-linear-gradient(120deg,
@@ -29,13 +31,14 @@ const SearchInput = styled(Input)({
   width: '100% !important',
 });
 
-function Header({ setTerm }) {
+function Header({setOpen}) {
   const { authenticated, user, logout } = useAuth();
+  const { appContext, setAppContext } = useAppContext();
   const history = useHistory();
 
   const onKeyPress = (event) => {
     if (event.key === 'Enter' && event.target.value !== '') {
-      setTerm(event.target.value);
+      setAppContext({...appContext, term: event.target.value});
     }
   };
 
@@ -53,21 +56,20 @@ function Header({ setTerm }) {
       <Menu.Menu position="right">
         <Item>
           <Icon name="sun" />
-          <Checkbox slider />
+          <Checkbox slider onChange={() => setAppContext({...appContext, themeIsDark: !appContext.themeIsDark})} />
           <Icon name="moon" />
         </Item>
         {!authenticated ? (
           <Item
             name="log in"
-            onClick={() => {
-              history.push('/login');
-            }}
+            onClick={() => setOpen(true)}
           />
         ) : (
-          <UserMenu item text={user ? user.username : '@wizeline'}>
+          <UserMenu item text={user ? user.name : '@username'}>
             <Dropdown.Menu>
-              <Dropdown.Item>Home</Dropdown.Item>
-              <Dropdown.Item>Favorites</Dropdown.Item>
+              <Dropdown.Item onClick={() => history.push('/home')}>Home</Dropdown.Item>
+              <Dropdown.Item onClick={() => history.push('/favorites')}>Favorites</Dropdown.Item>
+              <Dropdown.Item onClick={() => history.push('/watchLater')}>Watch later</Dropdown.Item>
               <Dropdown.Item
                 onClick={() => {
                   logout();
@@ -82,10 +84,5 @@ function Header({ setTerm }) {
     </TopMenu>
   );
 }
-
-Header.propTypes = {
-  setTerm: PropTypes.func
-};
-
 
 export default Header;

@@ -1,36 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 import Header from '../../pages/Header';
 import './Layout.styles.css';
 import { useAuth } from '../../providers/Auth';
 import SideBar from '../../pages/SideBar';
-import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import { useAppContext } from "../../utils/contexts/AppContext";
+import Login from '../../pages/Login';
 
 // eslint-disable-next-line react/prop-types
-function Layout({ setTerm, children }) {
-  const { authenticated, logout } = useAuth();
-  const history = useHistory();
 
-  function deAuthenticate(event) {
-    event.preventDefault();
-    logout();
-    history.push('/home');
-  }
+const Main = styled.main`
+  height: 100%;
+  background-color: ${ (props) => props.themeIsDark ? '#322A37' : '#fdfdfd'};
+  color: ${ (props) => props.themeIsDark ? '#fff' : '#000'};
+`;
+
+function Layout({ children }) {
+  const { authenticated } = useAuth();
+  const { appContext } = useAppContext();
+  const [open, setOpen] = useState(false);
 
   return (
-    <main title="main" className="container">
-      <Header setTerm={setTerm}/>
+    <Main title="main" className="container" themeIsDark={appContext.themeIsDark}>
+      <Header setOpen={setOpen} />
       <Grid>
       {authenticated && (
           <Grid.Column width={3}>
-            <SideBar logout={deAuthenticate} />
+            <SideBar />
           </Grid.Column>
         )}
         <Grid.Column width={authenticated ? 13 : 16}>
           {children}
         </Grid.Column>
       </Grid>
-    </main>
+      <Login open={open} setOpen={setOpen}/>
+    </Main>
   );
 }
 

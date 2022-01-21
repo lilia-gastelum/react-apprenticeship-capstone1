@@ -3,10 +3,15 @@ import { createMemoryHistory } from 'history';
 import { fireEvent, render, screen } from '@testing-library/react';
 import SideBar from './SideBar';
 import { Router } from 'react-router-dom';
+import { AppContextProvider } from "../../utils/contexts/AppContext";
 
 describe('renders side bar', () => {
     it('must display message', () => {
-        render(<SideBar />);
+        render(
+            <AppContextProvider>
+                <SideBar />
+            </AppContextProvider>
+        );
 
         const message = screen.getByText(/Home/i);
         expect(message).toBeInTheDocument();
@@ -16,9 +21,11 @@ describe('renders side bar', () => {
     test('change option home', () => {
         const history = createMemoryHistory();
         render(
-            <Router history={history}>
-                <SideBar />
-            </Router>
+            <AppContextProvider>
+                <Router history={history}>
+                    <SideBar />
+                </Router>
+            </AppContextProvider>
         );
         const button = screen.getByText('Home');
         expect(button).toBeInTheDocument();
@@ -30,9 +37,11 @@ describe('renders side bar', () => {
     test('change option favorites', () => {
         const history = createMemoryHistory();
         render(
-            <Router history={history}>
-                <SideBar />
-            </Router>
+            <AppContextProvider>
+                <Router history={history}>
+                    <SideBar />
+                </Router>
+            </AppContextProvider>
         );
         const button = screen.getByText('Favorites');
         expect(button).toBeInTheDocument();
@@ -44,9 +53,11 @@ describe('renders side bar', () => {
     test('change option watch later', () => {
         const history = createMemoryHistory();
         render(
-            <Router history={history}>
-                <SideBar />
-            </Router>
+            <AppContextProvider>
+                <Router history={history}>
+                    <SideBar />
+                </Router>
+            </AppContextProvider>
         );
         const button = screen.getByText('Watch Later');
         expect(button).toBeInTheDocument();
