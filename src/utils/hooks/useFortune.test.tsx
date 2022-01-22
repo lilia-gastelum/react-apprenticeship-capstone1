@@ -5,7 +5,6 @@ test('should get value', () => {
   const { result } = renderHook(() => useFortune())
 
   act(() => {
-    console.log(result);
     result
   })
 

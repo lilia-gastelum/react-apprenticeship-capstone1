@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import AuthProvider from '../../providers/Auth';
@@ -9,9 +9,11 @@ import LoginPage from '../../pages/Login';
 // import Private from '../Private';
 // import Fortune from '../Fortune';
 import Layout from '../Layout';
+import VideoPlayer from '../../pages/VideoPlayer';
 // import { random } from '../../utils/fns';
 
 function App() {
+  const [ term, setTerm ] = useState('wizeline');
   // useLayoutEffect(() => {
   //   const { body } = document;
 
@@ -33,22 +35,18 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Layout>
+        <Layout setTerm={setTerm}>
           <Switch>
-            <Route exact path="/">
-              <HomePage />
+            <Route exact path="/home">
+              <HomePage term={term}/>
             </Route>
             <Route exact path="/login">
               <LoginPage />
             </Route>
-            {/* <Private exact path="/secret">
-              <SecretPage />
-            </Private> */}
-            {/* <Route path="*">
-              <NotFound />
-            </Route> */}
+            <Route exact path="/video">
+              <VideoPlayer />
+            </Route>
           </Switch>
-          {/* <Fortune /> */}
         </Layout>
       </AuthProvider>
     </BrowserRouter>
